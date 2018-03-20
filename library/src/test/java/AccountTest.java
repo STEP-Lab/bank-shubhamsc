@@ -35,4 +35,11 @@ public class AccountTest {
     account.credit(1000.00);
     assertThat(account.getBalance(),is(2000.00));
   }
+
+  @Test
+  public void debitAmount() {
+    account.credit(2000.00);
+    account.debit(1000.00);
+    assertThat(account.getBalance(),is(2000.00));
+  }
 }

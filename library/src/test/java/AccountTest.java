@@ -1,8 +1,8 @@
 import com.thoughtworks.bank.Account;
+import com.thoughtworks.bank.InvalidAccountNumberException;
 import com.thoughtworks.bank.MinimumBalanceException;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -12,7 +12,7 @@ public class AccountTest {
   private Account account;
 
   @Before
-  public void setUp() throws MinimumBalanceException {
+  public void setUp() throws MinimumBalanceException, InvalidAccountNumberException {
     account = new Account("1234-1234", 1000.00);
   }
 
@@ -27,7 +27,7 @@ public class AccountTest {
   }
 
   @Test(expected = MinimumBalanceException.class)
-  public void checkMinimumBalance() throws MinimumBalanceException {
+  public void checkMinimumBalance() throws MinimumBalanceException, InvalidAccountNumberException {
     new Account("1234-1234", 800.00);
   }
 
@@ -47,5 +47,15 @@ public class AccountTest {
   @Test(expected = MinimumBalanceException.class)
   public void debitWhenInsufficientBalance() throws MinimumBalanceException {
     account.debit(500.00);
+  }
+
+  @Test(expected = InvalidAccountNumberException.class)
+  public void invalidAccountNumberWithoutHyphen() throws MinimumBalanceException, InvalidAccountNumberException {
+    new Account("12345678",1000.00);
+  }
+
+  @Test(expected = InvalidAccountNumberException.class)
+  public void invalidAccountNumberWithLessNumber() throws MinimumBalanceException, InvalidAccountNumberException {
+    new Account("1234-567",1000.00);
   }
 }

@@ -14,4 +14,7 @@ public class Account {
     return balance;
   }
 
+  public String getAccountNumber() {
+    return accountNumber;
+  }
 }

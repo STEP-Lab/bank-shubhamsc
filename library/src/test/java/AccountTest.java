@@ -18,4 +18,9 @@ public class AccountTest {
   public void getBalance() {
     assertThat(account.getBalance(),is(1000.0));
   }
+
+  @Test
+  public void getAccountNumber() {
+    assertThat(account.getAccountNumber(),is("1234-1234"));
+  }
 }

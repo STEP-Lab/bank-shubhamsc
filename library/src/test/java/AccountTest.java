@@ -2,6 +2,7 @@ import com.thoughtworks.bank.Account;
 import com.thoughtworks.bank.MinimumBalanceException;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -37,9 +38,14 @@ public class AccountTest {
   }
 
   @Test
-  public void debitAmount() {
+  public void debitAmount() throws MinimumBalanceException {
     account.credit(2000.00);
     account.debit(1000.00);
     assertThat(account.getBalance(),is(2000.00));
+  }
+
+  @Test(expected = MinimumBalanceException.class)
+  public void debitWhenInsufficientBalance() throws MinimumBalanceException {
+    account.debit(500.00);
   }
 }

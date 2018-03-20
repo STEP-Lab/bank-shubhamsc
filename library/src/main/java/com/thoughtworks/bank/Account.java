@@ -25,7 +25,14 @@ public class Account {
     this.balance += amount;
   }
 
-  public void debit(double amount) {
+  public void debit(double amount) throws MinimumBalanceException {
+    checkForMinimumBalance(amount);
     this.balance -= amount;
+  }
+
+  private void checkForMinimumBalance(double amount) throws MinimumBalanceException {
+    if(this.balance-amount<minimumBalance){
+      throw new MinimumBalanceException();
+    }
   }
 }

@@ -21,4 +21,7 @@ public class Account {
     return accountNumber;
   }
 
+  public void credit(double amount) {
+    this.balance += amount;
+  }
 }

@@ -58,4 +58,9 @@ public class AccountTest {
   public void invalidAccountNumberWithLessNumber() throws MinimumBalanceException, InvalidAccountNumberException {
     new Account("1234-567",1000.00);
   }
+
+  @Test(expected = InvalidAccountNumberException.class)
+  public void invalidAccountNumberWithAlphabets() throws MinimumBalanceException, InvalidAccountNumberException {
+    new Account("123b-a567",1000.00);
+  }
 }

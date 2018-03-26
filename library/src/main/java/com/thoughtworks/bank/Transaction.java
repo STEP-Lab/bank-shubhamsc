@@ -31,4 +31,17 @@ public class Transaction {
   public int hashCode() {
     return Objects.hash(amount, account);
   }
+
+  @Override
+  public String toString() {
+    return "Transaction{" +
+            "amount=" + amount +
+            ", account='" + account + '\'' +
+            ", date=" + date +
+            '}';
+  }
+
+  public double getAmount() {
+    return amount;
+  }
 }

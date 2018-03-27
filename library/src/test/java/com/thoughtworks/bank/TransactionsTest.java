@@ -1,10 +1,11 @@
 package com.thoughtworks.bank;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -59,11 +60,20 @@ public class TransactionsTest {
   }
 
   @Test
-  public void filterTransactionsByAmount() {
-    transactions.credit(1000,"1234-1234");
+  public void filterTransactionsByAmountGreaterThan() {
+    transactions.credit(1200,"1234-1234");
     transactions.credit(1500,"1234-1234");
     transactions.credit(500,"1234-1234");
     Transactions filteredTransactions = this.transactions.filterByAmountGreaterThan(1000);
-    assertThat(filteredTransactions.list,hasItems(new CreditTransaction(1000,"1234-1234"),new CreditTransaction(1500,"1234-1234")));
+    assertThat(filteredTransactions.list,hasItems(new CreditTransaction(1200,"1234-1234"),new CreditTransaction(1500,"1234-1234")));
+  }
+
+  @Test
+  public void filterTransactionsByAmountLesserThan() {
+    transactions.credit(800,"1234-1234");
+    transactions.credit(1500,"1234-1234");
+    transactions.credit(500,"1234-1234");
+    Transactions filteredTransactions = this.transactions.filterByAmountLesserThan(1000);
+    assertThat(filteredTransactions.list,hasItems(new CreditTransaction(800,"1234-1234"),new CreditTransaction(500,"1234-1234")));
   }
 }

@@ -21,7 +21,7 @@ public class Transactions {
   public Transactions filterByAmountGreaterThan(double amount) {
     Transactions transactions = new Transactions();
     for (Transaction transaction : list){
-      if (transaction.getAmount()>=amount)
+      if (transaction.getAmount()>amount)
         transactions.list.add(transaction);
     }
     return transactions;
@@ -31,5 +31,14 @@ public class Transactions {
     for (Transaction transaction : list){
       writer.println(transaction.toString());
     }
+  }
+
+  public Transactions filterByAmountLesserThan(double amount) {
+    Transactions transactions = new Transactions();
+    for (Transaction transaction : list){
+      if (transaction.getAmount()<amount)
+        transactions.list.add(transaction);
+    }
+    return transactions;
   }
 }

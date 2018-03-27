@@ -76,4 +76,22 @@ public class TransactionsTest {
     Transactions filteredTransactions = this.transactions.filterByAmountLesserThan(1000);
     assertThat(filteredTransactions.list,hasItems(new CreditTransaction(800,"1234-1234"),new CreditTransaction(500,"1234-1234")));
   }
+
+  @Test
+  public void filterAllCreditTransactions() {
+    transactions.credit(2000,"1234-1234");
+    transactions.debit(1500,"1234-1234");
+    transactions.credit(500,"1234-1234");
+    Transactions creditTransactions = transactions.filterAllCreditTransactions();
+    assertThat(creditTransactions.list,hasItems(new CreditTransaction(2000,"1234-1234"),new CreditTransaction(500,"1234-1234")));
+  }
+
+  @Test
+  public void filterAllDebitTransactions() {
+    transactions.credit(2000,"1234-1234");
+    transactions.debit(1000,"1234-1234");
+    transactions.debit(500,"1234-1234");
+    Transactions creditTransactions = transactions.filterAllDebitTransactions();
+    assertThat(creditTransactions.list,hasItems(new DebitTransaction(1000,"1234-1234"),new DebitTransaction(500,"1234-1234")));
+  }
 }

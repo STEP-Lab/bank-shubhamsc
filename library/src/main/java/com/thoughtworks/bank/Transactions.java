@@ -41,4 +41,24 @@ public class Transactions {
     }
     return transactions;
   }
+
+  public Transactions filterAllCreditTransactions() {
+    Transactions transactions = new Transactions();
+    for (Transaction transaction:list){
+      if(transaction instanceof CreditTransaction ){
+        transactions.list.add(transaction);
+      }
+    }
+    return transactions;
+  }
+
+  public Transactions filterAllDebitTransactions() {
+    Transactions transactions = new Transactions();
+    for (Transaction transaction:list){
+      if(transaction instanceof DebitTransaction ){
+        transactions.list.add(transaction);
+      }
+    }
+    return transactions;
+  }
 }
